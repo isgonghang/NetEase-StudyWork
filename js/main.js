@@ -292,27 +292,24 @@ slideBanner();
 })();
 //Tab选项切换模块
 var tab_module=(function(){
-	//取得head和text的Nodelist
-	var head1=document.getElementsByClassName("pro-design")[0];
-	var head2=document.getElementsByClassName("pro-language")[0];
-	var body1=document.getElementsByClassName("tab-body1")[0];
-	var body2=document.getElementsByClassName("tab-body2")[0];
-	//点击显示切换
-	head1.onclick=function(){
-		body1.style.display = 'block';
-		body2.style.display = 'none';
-		head1.id="p-focus";
-		head2.id="";
-		head1.style.color = '#fff';
-		head2.style.color = '#000';
-	}
-	head2.onclick=function(){
-		body1.style.display = 'none';
-		body2.style.display = 'block';
-		head1.id="";
-		head2.id="p-focus";
-		head1.style.color = '#000';
-		head2.style.color = '#fff';
+	var page=document.getElementsByClassName("tabs-num")[0];
+	var program=document.getElementsByClassName("pro-design")[0];
+	var design=document.getElementsByClassName("pro-language")[0];
+	program.onclick=function programList(){
+		if(design.id=="p-focus"){
+    	    program.id="p-focus";
+    	    program.style.color = 'white';
+    	    design.id="";
+    	    loadCourse('10','20','1');
+    	}
+    }
+	design.onclick=function designList(){
+	    if(program.id=="p-focus"){
+	        program.id="";
+	        design.id="p-focus";
+	        program.style.color = 'black';
+	        loadCourse('20','20','1');
+	    }
 	}
 	// 向现有URL的末尾添加查询字符串参数
 	function addURLParam(url,name,value){
@@ -320,17 +317,25 @@ var tab_module=(function(){
 	    url+=encodeURIComponent(name)+"="+encodeURIComponent(value);
 	    return url;
 	}
-	//ajax获取课程
-	var title1=document.getElementsByClassName("one-tab-title1");
-	window.onload=function(){
+	//获取课程
+	function loadCourse(pageNo,psize,type){
 		var oList=new XMLHttpRequest();
 		oList.onreadystatechange=function(){
 			if(oList.readyState==4){
 				if((oList.status>=200&&oList.status<=300)||oList.status==304){
 					var data=JSON.parse(oList.responseText);
 					console.log(data);
-					for(let i=0;i<10;i++){
-						title1.innerHTML=data[1].name;
+					for(let i=0;i<20;i++){
+						var imgi=document.getElementsByClassName("one-tab-img")[i];
+						var titlei=document.getElementsByClassName("one-tab-title")[i];
+						var authori=document.getElementsByClassName("one-tab-author")[i];
+						var numberi=document.getElementsByClassName("one-tab-number")[i];
+						var pricei=document.getElementsByClassName("one-tab-price")[i];
+						imgi.style.backgroundImage = 'url('+data.list[i].middlePhotoUrl+')';
+						titlei.innerHTML=data.list[i].name;
+						authori.innerHTML=data.list[i].provider;
+						numberi.childNodes[1].innerHTML=data.list[i].learnerCount;
+						pricei.childNodes[1].innerHTML=data.list[i].price;
 					}
 				}
 			}
@@ -342,4 +347,5 @@ var tab_module=(function(){
 		oList.open("get",url,true);
 		oList.send(null);
 	}
+	window.onload=loadCourse('10','20','1');
 })();
