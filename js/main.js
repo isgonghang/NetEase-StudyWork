@@ -325,7 +325,7 @@ var tab_module=(function(){
 				if((oList.status>=200&&oList.status<=300)||oList.status==304){
 					var data=JSON.parse(oList.responseText);
 					console.log(data);
-					for(let i=0;i<20;i++){
+					for(let i=0;i<psize;i++){
 						var imgi=document.getElementsByClassName("one-tab-img")[i];
 						var titlei=document.getElementsByClassName("one-tab-title")[i];
 						var authori=document.getElementsByClassName("one-tab-author")[i];
@@ -347,5 +347,65 @@ var tab_module=(function(){
 		oList.open("get",url,true);
 		oList.send(null);
 	}
-	window.onload=loadCourse('10','20','1');
+	//页码切换
+	page.addEventListener('click',(function(){
+		var getElement=function(eve,filter){
+			var element=eve.target;
+			while (element) {
+				if (filter(element)){
+					return element;
+				}
+				element=element.parentNode;
+			}
+		}
+        return function (event) {
+            var pagei = getElement(event, function (ele) {
+                return ((ele.className.indexOf('pagei') !== -1)||(ele.className.indexOf('tabs-prev') !== -1)||(ele.className.indexOf('tabs-next') !== -1));
+            });
+            event.preventDefault();
+            var index = pagei.dataset.index;
+            var indexon=index;
+            var pageon=document.getElementsByClassName('pgselected f-fl')[0];
+            if(index=='prv'){
+                if(pageon.dataset.index=='1'){return ;}
+                indexon=pageon.dataset.index-1;
+            }else if(index=='nxt'){
+                if(pageon.dataset.index=='8'){return ;}
+                indexon=-(-pageon.dataset.index-1);
+            }else{
+                indexon=pagei.dataset.index;
+            }
+            var pagex=page.getElementsByTagName('li');
+            for(var i=0;i<pagex.length;i++){
+                if(pagex[i].dataset.index==indexon){
+                    pagex[i].className="pgselected";
+                }else if((pagex[i].dataset.index!='prv')&&(pagex[i].dataset.index!='nxt')){
+                    pagex[i].className="pagei";
+                }
+            }
+            loadcourse(tabx,'20',indexon);
+        }
+	})());
+
+	//侧边栏课程
+	var sideList=new XMLHttpRequest();
+	sideList.open("get", "http://study.163.com/webDev/hotcouresByCategory.htm");
+	sideList.onreadystatechange=function(){
+		if(sideList.readyState==4){
+			if((sideList.status>=200&&sideList.status<=300)||sideList.status==304){
+				var sideData=JSON.parse(sideList.responseText);
+				console.log(sideData);
+				for(let i=0;i<10;i++){
+					var imgs=document.getElementsByClassName("list-img")[i];
+					var titles=document.getElementsByClassName("list-title")[i];
+					var numbers=document.getElementsByClassName("list-nums")[i];
+					imgs.setAttribute('src',sideData[i].smallPhotoUrl );
+					titles.innerHTML=sideData[i].name;
+					numbers.innerHTML=sideData[i].learnerCount;
+				}
+			}
+		}
+	}
+	sideList.send(null);
+	window.onload=loadCourse('10','20','1')&&sideList();
 })();
