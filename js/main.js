@@ -18,7 +18,7 @@ var tips_module=(function(){
 	    return cookie[Name];
 	}
 
-	/*设置cookie*/
+	//设置cookie
 	function setCookie(name, value, expires, path, domain, secure) {
 	    var cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 	    if (expires)
@@ -74,7 +74,7 @@ var login_module=(function(){
 	    return cookie[Name];
 	}
 
-	/*设置cookie*/
+	//设置cookie
 	function setCookie(name, value, expires, path, domain, secure) {
 	    var cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 	    if (expires)
@@ -205,7 +205,8 @@ var login_module=(function(){
 		}
 checkLogin();
 })();
-//轮播图
+
+//轮播图模块
 var slide_module=(function(){
 	function slideBanner(){
 		var list=document.getElementsByClassName("list")[0];
@@ -214,7 +215,7 @@ var slide_module=(function(){
 		var container=document.getElementsByClassName("container")[0];
 		function animate(offset){
 			//获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
-   	    	//且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+   	    		//且style.left获取的是字符串，需要用parseInt()取整转化为数字。
 			var oLeft=parseInt(list.style.left)+offset;
 			list.style.left=oLeft+"px";
 			//对偏移量进行判断，left小于4956(三张图的宽度)回到第一张，向前同理
@@ -278,8 +279,8 @@ var slide_module=(function(){
    	    	buttons[i].onclick=function () {
    	        	// 在浏览器的控制台打印一下，看看结果
    	        	console.log(i);
-   	        	/* 偏移量获取：这里获得鼠标移动到小圆点的位置，用this把index绑定到对象buttons[i]上.*/
-   	        	/* 由于这里的index是自定义属性，需要用到getAttribute()这个DOM2级方法，去获取自定义index的属性*/
+   	        	//偏移量获取：这里获得鼠标移动到小圆点的位置，用this把index绑定到对象buttons[i]上.
+   	        	//由于这里的index是自定义属性，需要用到getAttribute()这个DOM2级方法，去获取自定义index的属性
    	        	var clickIndex=parseInt(this.getAttribute('index'));
    	        	var offset=1652*(index-clickIndex);
    	        	animate(offset); //存放鼠标点击后的位置，用于小圆点的正常显示 
@@ -290,6 +291,7 @@ var slide_module=(function(){
 	}
 slideBanner();
 })();
+
 //Tab选项切换模块
 var tab_module=(function(){
 	var page=document.getElementsByClassName("tabs-num")[0];
