@@ -16,6 +16,7 @@
 **1.3 顶部右侧导航及内容区各产品的“了解更多”**
 
 点击导航中的“网易公开课”，“网易云课堂”，“中国大学MOOC”，新窗口打开对目的页面，对应的跳转链接如下，点击项的hover效果见视觉稿。点击“了解更多>”的跳转链接及打开方式相同。
+
 网易公开课：http://open.163.com/
 网易云课堂：http://study.163.com/
 中国大学MOOC：http://www.icourse163.org/
@@ -23,6 +24,7 @@
 **1.4 轮播图**
 
 三张轮播图轮播效果：实现每5s切换图片，图片循环播放；鼠标悬停某张图片，则暂停切换；切换效果使用入场图片500ms淡入的方式。点击后新开窗口打开目的页面，对应的跳转链接如下，
+
 banner1：http://open.163.com/
 banner2：http://study.163.com/
 banner3：http://www.icourse163.org/
@@ -52,14 +54,18 @@ banner3：http://www.icourse163.org/
 **2.1 获取课程列表**
 
 请求地址格式  http://study.163.com /webDev/couresByCategory.htm
+
 请求方式    get类型
+
 请求参数    pageNo ; 
-            psize ; 
+           psize ; 
             type ;
+
 请求参数说明  当前页码 ;
-              每页返回数据个数 ;
-              筛选类型（10：产品设计；20：编程语言） ;
+            每页返回数据个数 ;
+            筛选类型（10：产品设计；20：编程语言） ;
 返回  课程列表数据（JSON格式字符串，需要转成对象才能在程序中使用）
+
 返回数据说明  需要显示的字段如下：
 {
  “totalCount”: 80,//返回的数据总数
@@ -86,10 +92,15 @@ banner3：http://www.icourse163.org/
 **2.2 右侧“最热排行”**
 
 请求地址格式  http://study.163.com /webDev/hotcouresByCategory.htm
+
 请求方式    get类型
+
 请求参数    无
+
 请求参数说明  无
+
 返回  课程列表数据（JSON格式字符串，需要转成数组才能在程序中使用）
+
 返回数据说明  需要显示的字段如下：
 [{
    "id":"967019",//课程ID
@@ -107,10 +118,15 @@ banner3：http://www.icourse163.org/
 **2.3 导航关注**
 
 请求地址格式  http://study.163.com /webDev/ attention.htm
+
 请求方式    get类型
+
 请求参数    无
+
 请求参数说明  无
+
 返回  1
+
 返回数据说明  正确返回1后设置关注cookie（followSuc）
 
 **2.4 用户登录**
