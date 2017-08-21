@@ -132,13 +132,20 @@ banner3：http://www.icourse163.org/
 **2.4 用户登录**
 
 请求地址格式  http://study.163.com /webDev/login.htm
+
 请求方式    get类型
+
 请求参数    userName;
-password;
+           password;
+
 请求参数说明  固定用户帐号：studyOnline ;
+
 固定用户密码：study.163.com ;
+
 使用Md5加密该用户数据 ;
+
 返回  整型
+
 返回数据说明  1  //匹配用户名密码成功
 0  //匹配用户名密码失败
 
