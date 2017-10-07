@@ -83,7 +83,7 @@ banner3：http://www.icourse163.org/
  " provider ":"秋叶",//机构发布者
  " learnerCount ":"23",//在学人数
  " price ":"128",//课程价格，0为免费
- "categoryName ":"办公技能",//课程分类
+ "categoryName ":"办公技能",//课程分类 
  "description ":"适用人群：最适合即将实习、求职、就职的大学生，入职一、二三年的新人。别以为那些职场老人都知道！"//课程描述
 }]
 }
